@@ -1,0 +1,75 @@
+.main-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  width: 80%;
+}
+
+#quiz-table {
+  border-collapse: collapse;
+  margin-top: 5vh;
+}
+
+.scroll-wrapper {
+  overflow: auto;
+}
+
+#quiz-table th {
+  background-color: #5076ff;
+  padding: 0.8vw 1.2vw;
+  font-size: 1vw;
+  color: #f4f4f4;
+}
+
+#quiz-table td {
+  padding: 0.8vw 1.2vw;
+  font-size: 1vw;
+  color: black;
+}
+
+#quiz-table tr:nth-child(odd) {
+  background-color: #b3c4ff;
+}
+#quiz-table tr:nth-child(odd) {
+  background-color: #b3c4ff;
+}
+
+.poppin-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.heading-1 {
+  color: #5076ff;
+  font-size: 3.4vw;
+}
+
+.btn-bar {
+  display: flex;
+  gap: 1.5vw;
+}
+
+.question-text {
+  text-decoration: underline;
+}
+
+.rounded-left {
+  border-radius: 10px 0 0 10px;
+  overflow: hidden !important;
+}
+
+.rounded-right {
+  border-radius: 0 10px 10px 0;
+  overflow: hidden !important;
+}
+
+.additional-text-box {
+  margin-top: 5vh;
+  width: 100%;
+  text-align: end;
+}
+.additional-text {
+  font-size: 1vw;
+}

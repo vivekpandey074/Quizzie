@@ -1,0 +1,121 @@
+.main-box {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 2em;
+}
+
+/* Analytics Box CSS */
+
+.upper-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36vh;
+}
+
+.analytics-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  height: 25vh;
+  gap: 4vh;
+}
+
+.content-box-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 2vh;
+}
+
+.numerical {
+  font-size: 4vw;
+}
+
+.poppin-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.orange {
+  color: #ff5d01;
+}
+.blue {
+  color: #5076ff;
+}
+.green {
+  color: #60b84b;
+}
+
+/* Trending quizzes CSS */
+
+.trending-quiz-box {
+  height: 54vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6em 2em;
+}
+
+.heading-1 {
+  font-size: 1.7vw;
+}
+
+.heading-2 {
+  font-size: 1.7vw;
+}
+.trending-quizes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 2vh;
+  gap: 5vh;
+  height: 40vh;
+  overflow: auto;
+}
+
+.quiz-box {
+  width: 20%;
+  height: 10vh;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0.5em;
+}
+
+.content-box-2 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.heading-3 {
+  font-size: 1.7vw;
+}
+
+.impression-text {
+  font-size: 1.5vw;
+}
+
+.impression-text-box {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  gap: 2vh;
+}
+
+.eye-logo {
+  height: 4vh;
+}
+.createdOn-text {
+  font-size: 1vw;
+}
