@@ -6,6 +6,7 @@ import Main from "./pages/Main/Main";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Analytics from "./pages/Analytics/Analytics";
 import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
+import QuizAnalysis from "./pages/QuizAnalysis/QuizAnalysis";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Main />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="analytics" element={<Analytics />} />
+            <Route path="analytics/:id" element={<QuizAnalysis />} />
             <Route path="create" element={<CreateQuiz />} />
           </Route>
         </Routes>
