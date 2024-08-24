@@ -9,6 +9,7 @@ import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
 import QuizAnalysis from "./pages/QuizAnalysis/QuizAnalysis";
 import Quiz from "./pages/Quiz/Quiz";
 import QuizCompletion from "./pages/QuizCompletion/QuizCompletion";
+import PollCompletion from "./pages/PollCompletion/PollCompletion";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Route path="analytics/:id" element={<QuizAnalysis />} />
             <Route path="create" element={<CreateQuiz />} />
           </Route>
-          <Route path="quiz/:id" element={<QuizCompletion />} />
+          <Route path="quiz/:id" element={<PollCompletion />} />
         </Routes>
       </BrowserRouter>
     </div>
