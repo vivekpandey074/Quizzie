@@ -10,6 +10,9 @@ import QuizAnalysis from "./pages/QuizAnalysis/QuizAnalysis";
 import Quiz from "./pages/Quiz/Quiz";
 import QuizCompletion from "./pages/QuizCompletion/QuizCompletion";
 import PollCompletion from "./pages/PollCompletion/PollCompletion";
+import Notfound from "./pages/Notfound/Notfound";
+import { ToastContainer } from "react-toastify";
+import ProtectedPage from "./components/ProtectedPage/ProtectedPage";
 
 function App() {
   return (
@@ -19,14 +22,56 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/" element={<Main />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="analytics/:id" element={<QuizAnalysis />} />
-            <Route path="create" element={<CreateQuiz />} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedPage>
+                  <Dashboard />
+                </ProtectedPage>
+              }
+            />
+
+            <Route
+              path="analytics"
+              element={
+                <ProtectedPage>
+                  <Analytics />
+                </ProtectedPage>
+              }
+            />
+
+            <Route
+              path="analytics/:id"
+              element={
+                <ProtectedPage>
+                  <QuizAnalysis />
+                </ProtectedPage>
+              }
+            />
+
+            <Route
+              path="create"
+              element={
+                <ProtectedPage>
+                  <CreateQuiz />
+                </ProtectedPage>
+              }
+            />
           </Route>
-          <Route path="quiz/:id" element={<PollCompletion />} />
+
+          <Route
+            path="quiz/:id"
+            element={
+              <ProtectedPage>
+                <PollCompletion />
+              </ProtectedPage>
+            }
+          />
+
+          <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }
