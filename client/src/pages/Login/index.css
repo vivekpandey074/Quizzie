@@ -22,7 +22,7 @@
   font-family: "Jomhuria", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 16vh;
+  font-size: 11vh;
 }
 
 .login-tab-bar {
@@ -53,9 +53,11 @@
   flex-direction: column;
   align-items: end;
 }
+
 .login-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 100%;
 }
@@ -77,7 +79,8 @@
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 3vh;
+
+  font-size: 3.4vh;
 }
 
 .login-input-div > input {

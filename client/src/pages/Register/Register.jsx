@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { useState } from "react";
+import { RegisterUser } from "../../api/users";
+import { toast } from "react-toastify";
 
 const INVALID_NAME =
   "Invalid name: must be 3-64 long, without space, digit & special character.";
@@ -8,21 +10,20 @@ const INVALID_NAME =
 const PASSWORD_INVALID_MSG =
   "Weak password: should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!";
 
-const patObj = {
-  name: "^[a-zA-Z ]{3,64}$",
-  password:
-    "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
-};
+const regexName = new RegExp("^[a-zA-Z ]{3,64}$");
+const regexEmail = new RegExp("^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+const regexPassword = new RegExp(
+  "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+);
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmpassword: "",
   });
-
-  // const [submit, SetSubmit] = useState(false);
 
   const [error, SetError] = useState({
     name: false,
@@ -35,15 +36,19 @@ export default function Register() {
   const { name, email, password, confirmpassword } = formData;
 
   const handleChange = (e) => {
+    if (error[e.target.name]) {
+      SetError((prev) => ({ ...prev, [e.target.name]: false }));
+      setFormData((prev) => ({ ...prev, [e.target.name]: "" }));
+      return;
+    }
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // SetSubmit(true);
-
-    if (error.name) {
+    if (!regexName.test(name)) {
+      SetError((prev) => ({ ...prev, name: true }));
       setFormData((prev) => ({
         ...prev,
         name: INVALID_NAME,
@@ -51,7 +56,8 @@ export default function Register() {
       return;
     }
 
-    if (error.email) {
+    if (!regexEmail.test(email)) {
+      SetError((prev) => ({ ...prev, email: true }));
       setFormData((prev) => ({
         ...prev,
         email: "Invalid Email",
@@ -59,7 +65,8 @@ export default function Register() {
       return;
     }
 
-    if (error.password) {
+    if (!regexPassword.test(password)) {
+      SetError((prev) => ({ ...prev, password: true }));
       setFormData((prev) => ({
         ...prev,
         password: PASSWORD_INVALID_MSG,
@@ -67,21 +74,28 @@ export default function Register() {
       return;
     }
 
-    if (error.confirmpassword) {
-      setFormData((prev) => ({
-        ...prev,
-        confirmpassword: PASSWORD_INVALID_MSG,
-      }));
-      return;
-    }
-
     if (password != confirmpassword) {
-      SetError((prev) => ({ ...prev, [e.target.name]: true }));
+      SetError((prev) => ({ ...prev, confirmpassword: true }));
       setFormData((prev) => ({
         ...prev,
         confirmpassword: "password doesn't match",
       }));
       return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await RegisterUser(formData);
+      setLoading(false);
+      if (response.success) {
+        toast.success(response.message);
+        navigate("/login");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error(err.message || "Error while registering try after some time");
     }
   };
 
@@ -108,11 +122,6 @@ export default function Register() {
                 name="name"
                 onChange={(e) => {
                   handleChange(e);
-                  // if (e.target.checkValidity()) {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: false }));
-                  // } else {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: true }));
-                  // }
                 }}
                 value={name}
                 className={`${error.name ? "error-text" : ""}`}
@@ -122,15 +131,10 @@ export default function Register() {
             <div className="input-div">
               <label htmlFor="">Email</label>
               <input
-                type="email"
+                type="text"
                 name="email"
                 onChange={(e) => {
                   handleChange(e);
-                  // if (e.target.checkValidity()) {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: false }));
-                  // } else {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: true }));
-                  // }
                 }}
                 value={email}
                 className={`${error.email ? "error-text" : ""}`}
@@ -140,15 +144,10 @@ export default function Register() {
             <div className="input-div">
               <label htmlFor="">Password</label>
               <input
-                type="password"
+                type={error.password ? "text" : "password"}
                 name="password"
                 onChange={(e) => {
                   handleChange(e);
-                  // if (e.target.checkValidity()) {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: false }));
-                  // } else {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: true }));
-                  // }
                 }}
                 value={password}
                 className={`${error.password ? "error-text" : ""}`}
@@ -157,16 +156,11 @@ export default function Register() {
             <div className="input-div">
               <label htmlFor="">Confirm Password</label>
               <input
-                type="password"
+                type={error.confirmpassword ? "text" : "password"}
                 name="confirmpassword"
-                pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+                autoComplete="false"
                 onChange={(e) => {
                   handleChange(e);
-                  // if (e.target.checkValidity()) {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: false }));
-                  // } else {
-                  //   SetError((prev) => ({ ...prev, [e.target.name]: true }));
-                  // }
                 }}
                 value={confirmpassword}
                 className={`${error.confirmpassword ? "error-text" : ""}`}
@@ -174,7 +168,8 @@ export default function Register() {
             </div>
           </div>
           <button type="submit" className="submit-btn poppin-text">
-            Sign-Up
+            Sign - Up
+            {loading ? <span className="loader"></span> : <></>}
           </button>
         </form>
       </div>

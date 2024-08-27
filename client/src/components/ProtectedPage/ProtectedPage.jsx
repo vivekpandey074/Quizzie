@@ -23,7 +23,7 @@ export default function ProtectedPage({ children }) {
     } catch (err) {
       setLoading(false);
       toast.error(err.message || "Error occured while validating user");
-      localStorage.remove("token");
+      localStorage.removeItem("token");
       navigate("/login");
     }
   };

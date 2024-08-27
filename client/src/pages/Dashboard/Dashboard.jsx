@@ -5,30 +5,30 @@ export default function Dashboard() {
   return (
     <div className="main-box">
       <div className="upper-box">
-        <div className="analytics-box poppin-text">
+        <div className="analytics-box-dashboard poppin-text">
           <div className="content-box-1 orange ">
             <div>
-              <h1 className="heading-1">
+              <h1 className="dashboard-heading-1">
                 <span className="numerical"> 12 </span> Quiz
               </h1>
-              <h1 className="heading-2 ">Created</h1>
+              <h1 className="dashboard-heading-2 ">Created</h1>
             </div>
           </div>
           <div className="content-box-1 green">
             <div>
-              <h1 className="heading-1">
+              <h1 className="dashboard-heading-1">
                 <span className="numerical"> 110 </span>questions
               </h1>
-              <h1 className="heading-2">Created</h1>
+              <h1 className="dashboard-heading-2">Created</h1>
             </div>
           </div>
           <div className="content-box-1 blue">
             <div>
-              <h1 className="heading-1">
+              <h1 className="dashboard-heading-1">
                 <span className="numerical"> 1.4K </span>
                 Total
               </h1>
-              <h1 className="heading-2">Impression</h1>
+              <h1 className="dashboard-heading-2">Impression</h1>
             </div>
           </div>
         </div>

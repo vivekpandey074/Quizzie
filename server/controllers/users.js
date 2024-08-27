@@ -43,11 +43,11 @@ const handleUserLogin = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ email });
 
-  if (!user) throw new ApiError("404", "User not found");
+  if (!user) throw new ApiError("404", "Invalid email or password");
 
   const validPassword = await bcrypt.compare(password, user.password);
 
-  if (!validPassword) throw new ApiError(401, "Invalid Password");
+  if (!validPassword) throw new ApiError(401, "Invalid email or password");
 
   const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "1d",
