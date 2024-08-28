@@ -22,12 +22,35 @@ const quizSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    Questions: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "questions",
-      },
-    ],
+    Questions: {
+      type: [
+        {
+          question: { type: String, required: true },
+          correctanswerIndex: { type: String },
+          options: [
+            {
+              type: [
+                {
+                  text: {
+                    type: String,
+                  },
+                  imageurl: {
+                    type: String,
+                  },
+                },
+              ],
+              required: true,
+            },
+          ],
+          timer: { type: Number },
+          optionstype: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
+      required: true,
+    },
   },
   {
     timestamps: true,

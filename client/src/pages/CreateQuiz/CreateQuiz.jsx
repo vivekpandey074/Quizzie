@@ -10,13 +10,7 @@ export default function CreateQuiz() {
   return (
     <>
       <div className="main-cont-modal"></div>
-      {modalState === "1" ? (
-        <NamingQuizModal />
-      ) : modalState === "2" ? (
-        <CreatingQuizModal />
-      ) : (
-        <SharingQuizModal />
-      )}
+      {modalState === "1" ? <NamingQuizModal /> : <CreatingQuizModal />}
     </>
   );
 }

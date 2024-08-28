@@ -14,6 +14,7 @@ import Notfound from "./pages/Notfound/Notfound";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ProtectedPage from "./components/ProtectedPage/ProtectedPage";
+import SharingQuizModal from "./pages/CreateQuiz/SharingQuizModal/SharingQuizModal";
 
 function App() {
   return (
@@ -65,6 +66,14 @@ function App() {
                 element={
                   <ProtectedPage>
                     <CreateQuiz />
+                  </ProtectedPage>
+                }
+              />
+              <Route
+                path="create/:id"
+                element={
+                  <ProtectedPage>
+                    <SharingQuizModal />
                   </ProtectedPage>
                 }
               />

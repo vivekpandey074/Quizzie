@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ResetQuiz, SetModalState } from "../../../redux/quizSlice";
 import { toast } from "react-toastify";
+import { CreateQuizApi } from "../../../api/quiz";
 
 const initialState = {
   question: "",
@@ -22,8 +23,10 @@ const initialState = {
 export default function CreatingQuizModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { quizname, quiztype } = useSelector((state) => state.quiz);
 
   const [currentquestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [questionsArray, setQuestionsArray] = useState([initialState]);
 
@@ -85,7 +88,7 @@ export default function CreatingQuizModal() {
     navigate("/dashboard");
   };
 
-  const handleCreateQuiz = () => {
+  const handleCreateQuiz = async () => {
     if (!question)
       return toast.error("Please provide quiz question for current tab ");
 
@@ -100,7 +103,27 @@ export default function CreatingQuizModal() {
     if (correctanswerIndex === "")
       return toast.error("Please provide correct option");
 
-    dispatch(SetModalState("3"));
+    try {
+      setLoading(true);
+      const response = await CreateQuizApi({
+        name: quizname,
+        quizType: quiztype,
+        Questions: questionsArray,
+      });
+      setLoading(false);
+      if (response.success) {
+        toast.success("Quiz created successfully");
+        navigate(`${response.quizID}`);
+        dispatch(ResetQuiz());
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error(
+        err.message || "Error something went wrong while creating quiz"
+      );
+    }
   };
 
   return (

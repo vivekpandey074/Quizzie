@@ -13,8 +13,6 @@ const handleUserRegistration = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({ email });
 
-  console.log(user);
-
   if (user) throw new ApiError(409, "User already exist");
 
   const salt = await bcrypt.genSalt(10);

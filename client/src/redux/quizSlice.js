@@ -4,7 +4,6 @@ export const quizSlice = createSlice({
   name: "quiz",
   initialState: {
     modalState: "1",
-    // questions: [],
     quizname: "",
     quiztype: "",
   },
@@ -12,14 +11,7 @@ export const quizSlice = createSlice({
     SetModalState: (state, action) => {
       state.modalState = action.payload;
     },
-    // AddQuestion: (state, action) => {
-    //   state.questions = [...state.questions, action.payload];
-    // },
-    // RemoveQuestion: (state, action) => {
-    //   state.questions = state.questions.filter(
-    //     (item) => item.id != action.payload
-    //   );
-    // },
+
     SetQuiz: (state, action) => {
       state.quizname = action.payload.quizname;
       state.quiztype = action.payload.quiztype;
