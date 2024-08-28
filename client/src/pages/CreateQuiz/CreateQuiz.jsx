@@ -3,15 +3,16 @@ import "./index.css";
 import NamingQuizModal from "./NamingQuizModal/NamingQuizModal";
 import CreatingQuizModal from "./CreatingQuizModal/CreatingQuizModal";
 import SharingQuizModal from "./SharingQuizModal/SharingQuizModal";
+import { useSelector } from "react-redux";
 
 export default function CreateQuiz() {
-  const [currentStep, SetCurrentStep] = useState("3");
+  const { modalState } = useSelector((state) => state.quiz);
   return (
     <>
       <div className="main-cont-modal"></div>
-      {currentStep === "1" ? (
+      {modalState === "1" ? (
         <NamingQuizModal />
-      ) : currentStep === "2" ? (
+      ) : modalState === "2" ? (
         <CreatingQuizModal />
       ) : (
         <SharingQuizModal />

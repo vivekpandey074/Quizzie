@@ -43,6 +43,11 @@
   font-size: 1vw;
 }
 
+.select-type {
+  color: white;
+  background: #60b84b !important;
+}
+
 .quiz-name-input {
   width: 80%;
   border: none;
@@ -52,6 +57,7 @@
   padding: 1vh 2vh;
   color: #9f9f9f;
   font-weight: 500 !important;
+  outline: none;
 }
 
 .quiz-name-input::placeholder {
@@ -76,6 +82,7 @@
   width: 25%;
   border-radius: 0.9vh;
   text-align: center;
+  cursor: pointer;
 }
 
 .active-shadow {

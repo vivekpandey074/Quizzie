@@ -20,6 +20,7 @@
   font-weight: 500 !important;
   font-size: 1.2vw;
   gap: 0.5vw;
+  cursor: pointer;
 }
 
 .sec-box {
@@ -42,6 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 2vh;
+  width: 40vw;
 
   height: 100%;
 }
@@ -69,11 +71,13 @@
   align-items: center;
   font-size: 1.2vw;
   margin-left: 5vh;
+  cursor: pointer;
   width: 40% !important;
 }
 
 .delete-option {
   margin-left: 2vh;
+  cursor: pointer;
 }
 
 .radio-btn-options {
@@ -85,7 +89,6 @@
 
 .input-2 {
   width: 40% !important;
-  margin-left: 1.5vw;
 }
 
 .input-2::placeholder {
@@ -97,4 +100,24 @@
 }
 .hidden-2 {
   visibility: hidden;
+}
+
+.correct-answer-select {
+  color: white !important;
+  background: #60b84b !important;
+}
+.correct-answer-select::placeholder {
+  color: white !important;
+}
+
+.only-text-input {
+  width: 45%;
+}
+
+.only-image-input {
+  width: 45% !important;
+}
+
+.gap-options {
+  margin-left: 1.5vw;
 }

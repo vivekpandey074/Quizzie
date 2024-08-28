@@ -38,7 +38,7 @@
 .question-bar {
   color: #9f9f9f;
   display: flex;
-  width: 60%;
+  width: 75%;
   gap: 4vh;
 }
 
@@ -50,12 +50,14 @@
   border-radius: 50%;
   height: 8vh;
   width: 8vh;
+  cursor: pointer;
   font-weight: 500 !important;
 }
 
 .cross-btn {
   position: absolute;
   top: 5px;
+  cursor: pointer;
   right: 3px;
 }
 
@@ -113,4 +115,8 @@
   cursor: pointer;
   border: none;
   font-size: 1.2vw;
+}
+
+.add-question-logo {
+  cursor: pointer;
 }
