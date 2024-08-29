@@ -13,6 +13,7 @@
 
 .scroll-wrapper {
   overflow: auto;
+  height: 60vh;
 }
 
 #quiz-table th {
@@ -53,6 +54,7 @@
 
 .question-text {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .rounded-left {
@@ -72,4 +74,10 @@
 }
 .additional-text {
   font-size: 1vw;
+}
+
+.analysis-btn-bar:hover {
+  scale: 1.25;
+  transition: 0.3s;
+  cursor: pointer;
 }

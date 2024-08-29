@@ -1,9 +1,11 @@
 import { toast } from "react-toastify";
 import "./index.css";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Main() {
   const navigate = useNavigate();
+  const [active, setActive] = useState("dashboard");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -17,15 +19,30 @@ export default function Main() {
         <h1 className="logo">QUIZZIE</h1>
         <div className="nav poppin-text">
           <div
-            className="nav-btn  active"
-            onClick={() => navigate("/dashboard")}
+            className={`nav-btn ${active === "dashboard" ? "active" : ""} `}
+            onClick={() => {
+              setActive("dashboard");
+              navigate("/dashboard");
+            }}
           >
             Dashboard
           </div>
-          <div className="nav-btn " onClick={() => navigate("/analytics")}>
+          <div
+            className={`nav-btn ${active === "analytics" ? "active" : ""} `}
+            onClick={() => {
+              setActive("analytics");
+              navigate("/analytics");
+            }}
+          >
             Analytics
           </div>
-          <div className="nav-btn " onClick={() => navigate("/create")}>
+          <div
+            className={`nav-btn  `}
+            onClick={() => {
+              setActive("dashboard");
+              navigate("/create");
+            }}
+          >
             Create Quiz
           </div>
         </div>

@@ -43,7 +43,6 @@ export default function CreatingQuizModal() {
   };
 
   const checkOption = (optionsArray, type) => {
-    console.log(optionsArray, type);
     for (let index = 0; index < optionsArray.length; index++) {
       if (optionsArray[index][type] === "") {
         toast.error("please provide all the options");
@@ -66,7 +65,7 @@ export default function CreatingQuizModal() {
       if (!checkOption(options, "text")) return;
     }
 
-    if (correctanswerIndex === "")
+    if (correctanswerIndex === "" && quiztype === "Q&A")
       return toast.error("Please provide correct option");
 
     setQuestionsArray((prev) => [...prev, initialState]);
@@ -100,7 +99,7 @@ export default function CreatingQuizModal() {
       if (!checkOption(options, "text")) return;
     }
 
-    if (correctanswerIndex === "")
+    if (correctanswerIndex === "" && quiztype === "Q&A")
       return toast.error("Please provide correct option");
 
     try {

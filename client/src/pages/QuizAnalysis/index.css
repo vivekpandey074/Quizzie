@@ -15,15 +15,20 @@
 }
 
 .questions-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 6vh;
   height: 80%;
   margin-top: 2vh;
   width: 100%;
+
   overflow: auto;
 }
 
 .question-box {
   height: 35vh;
-  margin-top: 4vh;
+  padding-bottom: 6vh;
   width: 80%;
   border-bottom: 2px solid #d7d7d7;
 }

@@ -22,36 +22,48 @@ const quizSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    Questions: {
-      type: [
-        {
-          question: { type: String, required: true },
-          correctanswerIndex: { type: String },
-          options: [
+    Questions: [
+      {
+        question: { type: String, required: true },
+        correctanswerIndex: { type: String },
+        options: {
+          type: [
             {
-              type: [
-                {
-                  text: {
-                    type: String,
-                  },
-                  imageurl: {
-                    type: String,
-                  },
-                },
-              ],
-              required: true,
+              text: {
+                type: String,
+              },
+              imageurl: {
+                type: String,
+              },
+              pollcounts: {
+                type: Number,
+                default: 0,
+              },
             },
           ],
-          timer: { type: Number },
-          optionstype: {
-            type: String,
-            required: true,
-          },
+          required: true,
         },
-      ],
-      required: true,
-    },
+        timer: { type: Number },
+        optionstype: {
+          type: String,
+          required: true,
+        },
+        TotalAttempted: {
+          type: Number,
+          default: 0,
+        },
+        AnsweredCorrectly: {
+          type: Number,
+          default: 0,
+        },
+        AnsweredIncorrectly: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
   },
+
   {
     timestamps: true,
   }

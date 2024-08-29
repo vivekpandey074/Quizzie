@@ -6,6 +6,7 @@ export const quizSlice = createSlice({
     modalState: "1",
     quizname: "",
     quiztype: "",
+    allquiz: [],
   },
   reducers: {
     SetModalState: (state, action) => {
@@ -21,6 +22,9 @@ export const quizSlice = createSlice({
       state.quiztype = "";
       state.modalState = "1";
     },
+    SetAllQuiz: (state, action) => {
+      state.allquiz = action.payload.allquiz;
+    },
   },
 });
 
@@ -30,4 +34,5 @@ export const {
   RemoveQuestion,
   SetQuiz,
   ResetQuiz,
+  SetAllQuiz,
 } = quizSlice.actions;
