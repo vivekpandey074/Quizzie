@@ -48,7 +48,7 @@ const handleDeleteQuiz = asyncHandler(async (req, res, next) => {
 
 const handleGetQuiz = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
+
   const quiz = await Quiz.findById(id);
 
   if (!quiz) throw new ApiError(404, "No quiz found");
@@ -115,7 +115,7 @@ const handleGetTrendingQuizes = asyncHandler(async (req, res, next) => {
     },
   });
 
-  const dashboardAnalytics = await Quiz.aggregate([
+  let dashboardAnalytics = await Quiz.aggregate([
     {
       $match: { createdBy: new mongoose.Types.ObjectId(userId) },
     },
@@ -129,11 +129,27 @@ const handleGetTrendingQuizes = asyncHandler(async (req, res, next) => {
     },
   ]);
 
+  dashboardAnalytics = dashboardAnalytics[0];
+
   res.status(200).send({
     success: true,
     message: "trending quiz fetched successfully",
-    trendingquizes,
-    dashboardAnalytics,
+    quizesData: { trendingquizes, dashboardAnalytics },
+  });
+});
+
+const handleUpdateQuiz = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const { payload } = req.body;
+
+  await Quiz.findByIdAndUpdate(id, payload);
+
+  const allquiz = await Quiz.find({ createdBy: req.body.userId });
+
+  res.status(201).send({
+    success: true,
+    message: "quiz updated successfully",
+    allquiz,
   });
 });
 
@@ -145,4 +161,5 @@ module.exports = {
   handleUpdateOptionsAnalytics,
   handleUpdateImpression,
   handleGetTrendingQuizes,
+  handleUpdateQuiz,
 };

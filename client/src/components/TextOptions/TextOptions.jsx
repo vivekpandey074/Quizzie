@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import deletelogo from "../../assets/delete-logo.svg";
 import "./index.css";
 import { useSelector } from "react-redux";
@@ -16,6 +17,11 @@ export default function TextOptions({
   const { quiztype } = useSelector((state) => state.quiz);
 
   const handleAddOption = () => {
+    if (editing) {
+      toast.info("Can't add option in edit mode ");
+      return;
+    }
+
     setQuestionsArray(
       questionsArray.map((element, index) => {
         if (index === currentquestionIndex) {
@@ -29,6 +35,11 @@ export default function TextOptions({
   };
 
   const handleRemoveOption = (index) => {
+    if (editing) {
+      toast.info("Can't remove option in edit mode ");
+      return;
+    }
+
     setQuestionsArray(
       questionsArray.map((element, j) => {
         if (j === currentquestionIndex) {
@@ -84,7 +95,12 @@ export default function TextOptions({
                 className={`radio-btn-options ${
                   quiztype === "Poll" ? "hidden-2" : ""
                 }`}
-                onChange={() =>
+                onChange={() => {
+                  if (editing) {
+                    toast.info("Can't change answer  in edit mode ");
+                    return;
+                  }
+
                   setQuestionsArray(
                     questionsArray.map((element, j) => {
                       if (j === currentquestionIndex) {
@@ -94,10 +110,10 @@ export default function TextOptions({
                         };
                       } else return element;
                     })
-                  )
-                }
+                  );
+                }}
                 checked={
-                  correctanswerIndex !== "" && index === correctanswerIndex
+                  correctanswerIndex !== "" && index == correctanswerIndex
                 }
               />
 
@@ -105,7 +121,7 @@ export default function TextOptions({
                 <input
                   type="text"
                   className={`options-input active-shadow  poppin-text ${
-                    correctanswerIndex !== "" && correctanswerIndex === index
+                    correctanswerIndex !== "" && correctanswerIndex == index
                       ? "correct-answer-select"
                       : ""
                   } ${optionstype === "Text" ? "only-text-input" : ""} `}
@@ -122,7 +138,7 @@ export default function TextOptions({
                 <input
                   type="text"
                   className={`options-input  active-shadow input-2 poppin-text ${
-                    correctanswerIndex !== "" && correctanswerIndex === index
+                    correctanswerIndex !== "" && correctanswerIndex == index
                       ? "correct-answer-select"
                       : ""
                   } ${

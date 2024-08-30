@@ -39,7 +39,18 @@ export const GetQuizApi = async (id) => {
 
 export const EditQuizApi = async (id, payload) => {
   try {
-    const response = await axiosInstance.get(`/api/quiz/edit/${id}`, payload);
+    const response = await axiosInstance.put(`/api/quiz/edit/${id}`, {
+      payload,
+    });
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
+
+export const GetTrendingAndAnalyticsApi = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/quiz/trending`);
     return response.data;
   } catch (err) {
     return err.response.data;

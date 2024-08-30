@@ -3,17 +3,20 @@ import addlogo from "../../../assets/add-logo.svg";
 import crossbtn from "../../../assets/cross-btn.svg";
 import TextOptions from "../../../components/TextOptions/TextOptions";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { EditQuizApi } from "../../../api/quiz";
+import { SetAllQuiz } from "../../../redux/quizSlice";
 
-export default function UpdateQuizModal() {
-  const navigate = useNavigate();
+export default function UpdateQuizModal({ setShowEditModal, selectEditQuiz }) {
   const [currentquestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const [questionsArray, setQuestionsArray] = useState([]);
+  const [questionsArray, setQuestionsArray] = useState(
+    selectEditQuiz.Questions
+  );
 
   const { question, optionstype, correctanswerIndex, options, timer } =
     questionsArray[currentquestionIndex];
@@ -43,7 +46,7 @@ export default function UpdateQuizModal() {
   };
 
   const handleCancel = () => {
-    navigate("/dashboard");
+    setShowEditModal(false);
   };
 
   const handleEditQuiz = async () => {
@@ -60,13 +63,15 @@ export default function UpdateQuizModal() {
 
     try {
       setLoading(true);
-      const response = await EditQuizApi({
+      const response = await EditQuizApi(selectEditQuiz._id, {
+        ...selectEditQuiz,
         Questions: questionsArray,
       });
       setLoading(false);
       if (response.success) {
         toast.success("Quiz edited successfully");
-        navigate(`/dashboard`);
+        dispatch(SetAllQuiz({ allquiz: response.allquiz }));
+        setShowEditModal(false);
       } else {
         throw new Error(response.message);
       }

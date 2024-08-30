@@ -7,6 +7,7 @@ const {
   handleUpdateOptionsAnalytics,
   handleUpdateImpression,
   handleGetTrendingQuizes,
+  handleUpdateQuiz,
 } = require("../controllers/quiz");
 const router = require("express").Router();
 
@@ -19,6 +20,8 @@ router.patch(
   authMiddleware,
   handleUpdateOptionsAnalytics
 );
+
+router.put("/edit/:id", authMiddleware, handleUpdateQuiz);
 
 router.get("/trending", authMiddleware, handleGetTrendingQuizes);
 

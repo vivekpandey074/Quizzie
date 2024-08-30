@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SetAllQuiz } from "../../redux/quizSlice";
+import UpdateQuizModal from "../CreateQuiz/UpdateQuizModal/UpdateQuizModal";
 
 const options = {
   year: "numeric", // e.g., 2024
@@ -35,6 +36,8 @@ export default function Analytics() {
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectDeleteQuiz, setSelectDeleteQuiz] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectEditQuiz, setSelectEditQuiz] = useState("");
 
   const handleCopytoClipboard = (id) => {
     navigator.clipboard.writeText(`http://localhost:5173/create/${id}`);
@@ -90,7 +93,15 @@ export default function Analytics() {
                     <td> {formatedDate(quizitem.createdAt)}</td>
                     <td>{quizitem.impressions}</td>
                     <td className="btn-bar">
-                      <img src={editlogo} alt="" className="analysis-btn-bar" />
+                      <img
+                        src={editlogo}
+                        alt=""
+                        className="analysis-btn-bar"
+                        onClick={() => {
+                          setShowEditModal(true);
+                          setSelectEditQuiz(quizitem);
+                        }}
+                      />
                       <img
                         src={deletelogo}
                         alt=""
@@ -129,6 +140,12 @@ export default function Analytics() {
         <DeleteModal
           setDeleteModal={setDeleteModal}
           selectDeleteQuiz={selectDeleteQuiz}
+        />
+      )}
+      {showEditModal && (
+        <UpdateQuizModal
+          setShowEditModal={setShowEditModal}
+          selectEditQuiz={selectEditQuiz}
         />
       )}
     </>
