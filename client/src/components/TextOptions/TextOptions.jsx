@@ -7,6 +7,7 @@ export default function TextOptions({
   setCurrentQuestionIndex,
   questionsArray,
   setQuestionsArray,
+  editing,
 }) {
   const safeIndex =
     currentquestionIndex >= questionsArray.length ? 0 : currentquestionIndex;

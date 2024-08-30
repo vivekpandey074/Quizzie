@@ -36,3 +36,12 @@ export const GetQuizApi = async (id) => {
     return err.response.data;
   }
 };
+
+export const EditQuizApi = async (id, payload) => {
+  try {
+    const response = await axiosInstance.get(`/api/quiz/edit/${id}`, payload);
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
