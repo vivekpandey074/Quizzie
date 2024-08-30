@@ -14,6 +14,7 @@
   border-radius: 2vh;
   box-sizing: border-box;
   padding: 4vh 6vh;
+  overflow: auto;
 }
 
 .quiz-info-bar {
@@ -37,8 +38,9 @@
 }
 
 .quiz-question {
-  font-size: 2vw;
+  font-size: 1.5vw;
   margin-top: 1.2vw;
+  margin-bottom: 2vw;
   font-weight: 700 !important;
 }
 

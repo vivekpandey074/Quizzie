@@ -1,26 +1,36 @@
 import "./index.css";
-import optionimg from "../../assets/optionimg.png";
+import defaultimg from "../../assets/defaultimage.jpg";
 
-export default function PublicQuizOptions({ type = "text" }) {
+export default function PublicQuizOptions({
+  optionstype,
+  selectedOption,
+  setSelectedOption,
+  options,
+}) {
   return (
     <div className="options-wrapper poppin-text">
       <div className="options-div-2 ">
-        <div className="option">
-          {/* <p>Option 1</p> */}
-          <img src={optionimg} alt="" className="option-img" />
-        </div>
-        <div className="option">
-          <p>Option 2</p>
-          {/* <img src={optionimg} alt="" /> */}
-        </div>
-        <div className="option image-text-option">
-          <p>Sample Image</p>
-          <img src={optionimg} alt="" className="option-img-2" />
-        </div>
-        <div className="option image-text-option">
-          <p>Sample Image</p>
-          <img src={optionimg} alt="" className="option-img-2" />
-        </div>
+        {options?.map((item, index) => (
+          <>
+            <div
+              className={`option scrollable-element ${
+                optionstype === "Text&ImageURL" ? "image-text-option" : ""
+              } ${index === selectedOption ? "live-selected-option" : ""}`}
+              onClick={() => setSelectedOption(index)}
+            >
+              {optionstype !== "ImageURL" ? <p>{item.text}</p> : <></>}
+              {optionstype !== "Text" ? (
+                <img
+                  src={item.imageurl || defaultimg}
+                  alt=""
+                  className="option-img-2"
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          </>
+        ))}
       </div>
     </div>
   );

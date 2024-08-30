@@ -80,10 +80,26 @@ function App() {
             </Route>
 
             <Route
-              path="quiz/:id"
+              path="live-quiz/:id"
+              element={
+                <ProtectedPage>
+                  <Quiz />
+                </ProtectedPage>
+              }
+            />
+            <Route
+              path="completition/poll"
               element={
                 <ProtectedPage>
                   <PollCompletion />
+                </ProtectedPage>
+              }
+            />
+            <Route
+              path="completition/q&a"
+              element={
+                <ProtectedPage>
+                  <QuizCompletion />
                 </ProtectedPage>
               }
             />

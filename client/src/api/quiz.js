@@ -56,3 +56,13 @@ export const GetTrendingAndAnalyticsApi = async () => {
     return err.response.data;
   }
 };
+export const UpdateImpressionApi = async (id) => {
+  try {
+    const response = await axiosInstance.patch(
+      `/api/quiz/update-impressions/${id}`
+    );
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};

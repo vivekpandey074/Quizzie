@@ -6,7 +6,7 @@ export default function SharingQuizModal() {
   const { id } = useParams();
   const navigate = useNavigate();
   const handleCopytoClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:5173/create/${id}`);
+    navigator.clipboard.writeText(`http://localhost:5173/live-quiz/${id}`);
     toast.success("Link copied to Clipboard");
   };
 
