@@ -5,6 +5,8 @@ const {
   handleDeleteQuiz,
   handleGetQuiz,
   handleUpdateOptionsAnalytics,
+  handleUpdateImpression,
+  handleGetTrendingQuizes,
 } = require("../controllers/quiz");
 const router = require("express").Router();
 
@@ -18,4 +20,7 @@ router.patch(
   handleUpdateOptionsAnalytics
 );
 
+router.get("/trending", authMiddleware, handleGetTrendingQuizes);
+
+router.patch("/update-impressions/:id", authMiddleware, handleUpdateImpression);
 module.exports = router;

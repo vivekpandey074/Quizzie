@@ -33,6 +33,13 @@ export default function Analytics() {
   const { allquiz } = useSelector((state) => state.quiz);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectDeleteQuiz, setSelectDeleteQuiz] = useState("");
+
+  const handleCopytoClipboard = (id) => {
+    navigator.clipboard.writeText(`http://localhost:5173/create/${id}`);
+    toast.success("Link copied to Clipboard");
+  };
 
   useEffect(() => {
     const GetAllUserQuiz = async () => {
@@ -88,11 +95,16 @@ export default function Analytics() {
                         src={deletelogo}
                         alt=""
                         className="analysis-btn-bar"
+                        onClick={() => {
+                          setDeleteModal(true);
+                          setSelectDeleteQuiz(() => quizitem?._id);
+                        }}
                       />
                       <img
                         src={sharelogo}
                         alt=""
                         className="analysis-btn-bar"
+                        onClick={() => handleCopytoClipboard(quizitem?._id)}
                       />
                     </td>
                     <td
@@ -113,7 +125,12 @@ export default function Analytics() {
           </p>
         </div>
       </div>
-      {/* <DeleteModal /> */}
+      {deleteModal && (
+        <DeleteModal
+          setDeleteModal={setDeleteModal}
+          selectDeleteQuiz={selectDeleteQuiz}
+        />
+      )}
     </>
   );
 }

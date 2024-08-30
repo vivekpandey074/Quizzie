@@ -21,6 +21,7 @@ export const GetAllQuizApi = async () => {
 export const DeleteQuizApi = async (id) => {
   try {
     const response = await axiosInstance.delete(`/api/quiz/deletequiz/${id}`);
+
     return response.data;
   } catch (err) {
     return err.response.data;

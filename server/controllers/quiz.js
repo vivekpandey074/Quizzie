@@ -1,6 +1,7 @@
 const asyncHandler = require("../utils/asyncHandler");
 const Quiz = require("../models/quizModel");
 const ApiError = require("../utils/ApiError");
+const mongoose = require("mongoose");
 
 const handleCreateQuiz = asyncHandler(async (req, res, next) => {
   const { name, quizType, Questions } = req.body;
@@ -36,9 +37,12 @@ const handleDeleteQuiz = asyncHandler(async (req, res, next) => {
 
   await Quiz.deleteOne({ _id: id });
 
+  const allquiz = await Quiz.find({ createdBy: req.body.userId });
+
   res.status(200).send({
     success: true,
     message: "Quiz deleted successfully",
+    allquiz,
   });
 });
 
@@ -84,10 +88,61 @@ const handleUpdateOptionsAnalytics = asyncHandler(async (req, res, next) => {
   });
 });
 
+const handleUpdateImpression = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const updatedquiz = await Quiz.findById(id);
+
+  if (!updatedquiz) throw new ApiError(404, "quiz not found");
+
+  updatedquiz.impressions += 1;
+
+  await updatedquiz.save();
+
+  res.status(200).send({
+    success: true,
+    message: "impression updated successfully",
+  });
+});
+
+const handleGetTrendingQuizes = asyncHandler(async (req, res, next) => {
+  const { userId } = req.body;
+
+  const trendingquizes = await Quiz.find({
+    createdBy: userId,
+    impressions: {
+      $gt: 10,
+    },
+  });
+
+  const dashboardAnalytics = await Quiz.aggregate([
+    {
+      $match: { createdBy: new mongoose.Types.ObjectId(userId) },
+    },
+    {
+      $group: {
+        _id: null,
+        totalImpressions: { $sum: "$impressions" },
+        totalQuizzes: { $sum: 1 },
+        totalQuestions: { $sum: { $size: "$Questions" } },
+      },
+    },
+  ]);
+
+  res.status(200).send({
+    success: true,
+    message: "trending quiz fetched successfully",
+    trendingquizes,
+    dashboardAnalytics,
+  });
+});
+
 module.exports = {
   handleCreateQuiz,
   handleGetAllQuiz,
   handleDeleteQuiz,
   handleGetQuiz,
   handleUpdateOptionsAnalytics,
+  handleUpdateImpression,
+  handleGetTrendingQuizes,
 };
