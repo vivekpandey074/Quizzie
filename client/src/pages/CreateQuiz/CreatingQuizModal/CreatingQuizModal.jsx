@@ -5,7 +5,7 @@ import TextOptions from "../../../components/TextOptions/TextOptions";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ResetQuiz, SetModalState } from "../../../redux/quizSlice";
+import { ResetQuiz } from "../../../redux/quizSlice";
 import { toast } from "react-toastify";
 import { CreateQuizApi } from "../../../api/quiz";
 
@@ -228,7 +228,7 @@ export default function CreatingQuizModal() {
           className="createquiz-modal-btn-1 poppin-text "
           onClick={handleCreateQuiz}
         >
-          Create Quiz
+          Create Quiz {loading ? <span className="loader"></span> : <></>}
         </button>
       </div>
     </div>

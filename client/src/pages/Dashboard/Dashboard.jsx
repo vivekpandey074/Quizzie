@@ -55,7 +55,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="main-box border-app">
+    <div className="main-box">
       {loading ? (
         <>
           <h1 className="poppin-text">Loading...</h1>
