@@ -8,6 +8,7 @@ const {
   handleUpdateImpression,
   handleGetTrendingQuizes,
   handleUpdateQuiz,
+  handleGetLiveQuiz,
 } = require("../controllers/quiz");
 const router = require("express").Router();
 
@@ -15,6 +16,7 @@ router.post("/create", authMiddleware, handleCreateQuiz);
 router.get("/analytics/allquiz", authMiddleware, handleGetAllQuiz);
 router.delete("/deletequiz/:id", authMiddleware, handleDeleteQuiz);
 router.get("/particular/:id", authMiddleware, handleGetQuiz);
+router.get("/particular-live/:id", handleGetLiveQuiz);
 router.patch("/update-analytics/:quizID", handleUpdateOptionsAnalytics);
 
 router.put("/edit/:id", authMiddleware, handleUpdateQuiz);

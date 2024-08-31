@@ -4,7 +4,7 @@ import "./index.css";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
-  GetQuizApi,
+  GetLiveQuizApi,
   OptionAnalyticsUpdateApi,
   UpdateImpressionApi,
 } from "../../api/quiz";
@@ -110,7 +110,7 @@ export default function Quiz() {
     const GetLiveQuiz = async () => {
       try {
         setLoading(true);
-        const response = await GetQuizApi(id);
+        const response = await GetLiveQuizApi(id);
         setLoading(false);
         if (response.success) {
           setQuiz(response.quiz);

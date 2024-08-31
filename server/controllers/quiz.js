@@ -60,6 +60,20 @@ const handleGetQuiz = asyncHandler(async (req, res, next) => {
   });
 });
 
+const handleGetLiveQuiz = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const quiz = await Quiz.findById(id);
+
+  if (!quiz) throw new ApiError(404, "No quiz found");
+
+  res.status(200).send({
+    success: true,
+    message: "quiz fetches successfully",
+    quiz,
+  });
+});
+
 const handleUpdateOptionsAnalytics = asyncHandler(async (req, res, next) => {
   const { quizID } = req.params;
   const { questionIndex, optionIndex, isCorrect } = req.query;
@@ -164,4 +178,5 @@ module.exports = {
   handleUpdateImpression,
   handleGetTrendingQuizes,
   handleUpdateQuiz,
+  handleGetLiveQuiz,
 };

@@ -36,6 +36,14 @@ export const GetQuizApi = async (id) => {
     return err.response.data;
   }
 };
+export const GetLiveQuizApi = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/api/quiz/particular-live/${id}`);
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
 
 export const EditQuizApi = async (id, payload) => {
   try {
