@@ -40,7 +40,9 @@ export default function Analytics() {
   const [selectEditQuiz, setSelectEditQuiz] = useState("");
 
   const handleCopytoClipboard = (id) => {
-    navigator.clipboard.writeText(`http://localhost:5173/live-quiz/${id}`);
+    navigator.clipboard.writeText(
+      `https://quizzie-roughwork.onrender.com/live-quiz/${id}`
+    );
     toast.success("Link copied to Clipboard");
   };
 

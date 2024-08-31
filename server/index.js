@@ -9,7 +9,7 @@ const quizRouter = require("./routes/quizRoutes.js");
 const PORT = process.env.PORT || 5000;
 
 const corsoptions = {
-  origin: "http://localhost:5173",
+  origin: "https://quizzie-roughwork.onrender.com",
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 };
