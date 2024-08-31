@@ -15,11 +15,7 @@ router.post("/create", authMiddleware, handleCreateQuiz);
 router.get("/analytics/allquiz", authMiddleware, handleGetAllQuiz);
 router.delete("/deletequiz/:id", authMiddleware, handleDeleteQuiz);
 router.get("/particular/:id", authMiddleware, handleGetQuiz);
-router.patch(
-  "/update-analytics/:quizID",
-  authMiddleware,
-  handleUpdateOptionsAnalytics
-);
+router.patch("/update-analytics/:quizID", handleUpdateOptionsAnalytics);
 
 router.put("/edit/:id", authMiddleware, handleUpdateQuiz);
 

@@ -193,7 +193,7 @@ export default function Quiz() {
         ) : (
           <>
             {" "}
-            <div className="quiz-info-bar">
+            <div className="quiz-info-bar ">
               <div className="">
                 0{currentQuestionIndex + 1}/0{Questions?.length}
               </div>
@@ -216,7 +216,7 @@ export default function Quiz() {
               setSelectedOption={setSelectedOption}
               options={Questions && Questions[currentQuestionIndex]?.options}
             />
-            <div className="quiz-btn-wrapper ">
+            <div className="quiz-btn-wrapper  ">
               <button
                 className="quiz-modal-btn poppin-text"
                 onClick={() => {

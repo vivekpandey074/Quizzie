@@ -54,3 +54,27 @@
   cursor: pointer;
   font-weight: 700 !important;
 }
+
+@media only screen and (max-width: 768px) {
+  .quiz-question {
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 8vw;
+  }
+
+  .quiz-info-bar {
+    font-size: 4vw;
+  }
+
+  .quiz-cont {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .quiz-modal-btn {
+    font-size: 4vw;
+    width: 80%;
+    margin-top: 2vw;
+  }
+}

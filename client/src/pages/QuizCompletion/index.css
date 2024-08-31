@@ -21,3 +21,20 @@
   width: 50%;
   height: 60%;
 }
+
+@media only screen and (max-width: 768px) {
+  .congrats-text {
+    font-size: 8vw;
+    text-align: center;
+  }
+
+  .trophy-img {
+    margin-left: 1vh;
+    width: 100%;
+    height: 60%;
+  }
+
+  .score-text {
+    font-size: 6vw;
+  }
+}

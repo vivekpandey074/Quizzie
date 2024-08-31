@@ -74,13 +74,9 @@ const handleUpdateOptionsAnalytics = asyncHandler(async (req, res, next) => {
   } else if (quiz.quizType === "Q&A") {
     quiz.Questions[questionIndex].TotalAttempted += 1;
 
-    console.log(isCorrect);
     if (isCorrect == "true") {
-      console.log("Inside correct");
-      console.log(isCorrect);
       quiz.Questions[questionIndex].AnsweredCorrectly += 1;
     } else {
-      console.log("Insider incorrect");
       quiz.Questions[questionIndex].AnsweredIncorrectly += 1;
     }
 
