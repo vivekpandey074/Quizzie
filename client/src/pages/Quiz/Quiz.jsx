@@ -3,7 +3,11 @@ import PublicQuizOptions from "../../components/PublicQuizOptions/PublicQuizOpti
 import "./index.css";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { GetQuizApi, UpdateImpressionApi } from "../../api/quiz";
+import {
+  GetQuizApi,
+  OptionAnalyticsUpdateApi,
+  UpdateImpressionApi,
+} from "../../api/quiz";
 
 export default function Quiz() {
   const { id } = useParams();
@@ -13,18 +17,61 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [score, setScore] = useState(0);
+  const [loading2, setLoading2] = useState(false);
 
   const { Questions } = quiz;
 
   const [seconds, setSeconds] = useState(0);
 
+  const handleOptionAnalyticsUpdate = async (isCorrect, nextQuestion) => {
+    try {
+      setLoading2(true);
+      const response = await OptionAnalyticsUpdateApi(
+        id,
+        currentQuestionIndex,
+        selectedOption,
+        isCorrect
+      );
+      setLoading2(false);
+
+      if (response.success) {
+        setSelectedOption("");
+        if (isCorrect) setScore((prev) => prev + 1);
+        if (nextQuestion) setCurrentQuestionIndex((prev) => prev + 1);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (err) {
+      setLoading2(false);
+      toast.error(
+        err.message ||
+          "Error something went wrong while updating option analytics "
+      );
+    }
+  };
+
   useEffect(() => {
     if (seconds <= 0) {
       // when it is last question and timer gets over we need to submit the quiz autmatically
-      if (Questions && Questions.length === currentQuestionIndex + 1) {
+      if (
+        Questions &&
+        Questions.length === currentQuestionIndex + 1 &&
+        Questions[currentQuestionIndex]?.timer != "0"
+      ) {
+        handleOptionAnalyticsUpdate(
+          selectedOption == Questions[currentQuestionIndex].correctanswerIndex,
+          false
+        );
+
         quiz?.quizType === "Q&A"
           ? navigate("/completion/q&a", {
-              state: { score, totalQuestions: Questions.length },
+              state: {
+                score,
+                totalQuestions: Questions.length,
+                lastCorrect:
+                  selectedOption ==
+                  Questions[currentQuestionIndex].correctanswerIndex,
+              },
             })
           : navigate("/completion/poll");
 
@@ -32,8 +79,13 @@ export default function Quiz() {
       }
 
       //when it is any other question, we need to update score and anlytics
+      console.log("Hellow");
+      console.log(selectedOption);
       if (Questions && Questions[currentQuestionIndex]?.timer != "0") {
-        setCurrentQuestionIndex((prev) => prev + 1);
+        handleOptionAnalyticsUpdate(
+          selectedOption == Questions[currentQuestionIndex].correctanswerIndex,
+          true
+        );
       }
 
       return;
@@ -46,6 +98,7 @@ export default function Quiz() {
     return () => clearInterval(timer);
   }, [seconds]);
 
+  // Setting timer initial value on each question
   useEffect(() => {
     setSelectedOption("");
     setSeconds(() => {
@@ -60,7 +113,6 @@ export default function Quiz() {
         const response = await GetQuizApi(id);
         setLoading(false);
         if (response.success) {
-          console.log(response.quiz);
           setQuiz(response.quiz);
         } else {
           throw new Error(response.message);
@@ -91,7 +143,31 @@ export default function Quiz() {
     UpdateImpression();
   }, []);
 
-  const handleLiveQuizSubmit = () => {};
+  const handleLiveQuizSubmit = () => {
+    if (selectedOption === "") {
+      toast.error("choose any option to move to next question");
+      return;
+    }
+
+    if (Questions && Questions.length === currentQuestionIndex + 1) {
+      handleOptionAnalyticsUpdate(
+        selectedOption == Questions[currentQuestionIndex].correctanswerIndex,
+        false
+      );
+
+      quiz?.quizType === "Q&A"
+        ? navigate("/completion/q&a", {
+            state: {
+              score,
+              totalQuestions: Questions.length,
+              lastCorrect:
+                selectedOption ==
+                Questions[currentQuestionIndex].correctanswerIndex,
+            },
+          })
+        : navigate("/completion/poll");
+    }
+  };
 
   const handleNext = () => {
     if (selectedOption === "") {
@@ -99,7 +175,12 @@ export default function Quiz() {
       return;
     }
 
-    setCurrentQuestionIndex((prev) => prev + 1);
+    if (Questions) {
+      handleOptionAnalyticsUpdate(
+        selectedOption == Questions[currentQuestionIndex].correctanswerIndex,
+        true
+      );
+    }
   };
 
   return (
@@ -152,7 +233,8 @@ export default function Quiz() {
                 {quiz.Questions &&
                 quiz?.Questions.length === currentQuestionIndex + 1
                   ? "SUBMIT"
-                  : "NEXT"}
+                  : "NEXT"}{" "}
+                {loading2 ? <span className="loader"></span> : <></>}
               </button>
             </div>
           </>

@@ -68,15 +68,21 @@ const handleUpdateOptionsAnalytics = asyncHandler(async (req, res, next) => {
 
   if (!quiz) throw new ApiError(404, "quiz not found");
 
-  if (quiz.quizType === "Poll") {
+  if (quiz.quizType === "Poll" && optionIndex) {
     quiz.Questions[questionIndex].options[optionIndex].pollcounts += 1;
-
     await quiz.save();
-  } else {
+  } else if (quiz.quizType === "Q&A") {
     quiz.Questions[questionIndex].TotalAttempted += 1;
-    isCorrect
-      ? (quiz.Questions[questionIndex].AnsweredCorrectly += 1)
-      : (quiz.Questions[questionIndex].AnsweredIncorrectly += 1);
+
+    console.log(isCorrect);
+    if (isCorrect == "true") {
+      console.log("Inside correct");
+      console.log(isCorrect);
+      quiz.Questions[questionIndex].AnsweredCorrectly += 1;
+    } else {
+      console.log("Insider incorrect");
+      quiz.Questions[questionIndex].AnsweredIncorrectly += 1;
+    }
 
     await quiz.save();
   }

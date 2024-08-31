@@ -79,30 +79,9 @@ function App() {
               />
             </Route>
 
-            <Route
-              path="live-quiz/:id"
-              element={
-                <ProtectedPage>
-                  <Quiz />
-                </ProtectedPage>
-              }
-            />
-            <Route
-              path="completition/poll"
-              element={
-                <ProtectedPage>
-                  <PollCompletion />
-                </ProtectedPage>
-              }
-            />
-            <Route
-              path="completition/q&a"
-              element={
-                <ProtectedPage>
-                  <QuizCompletion />
-                </ProtectedPage>
-              }
-            />
+            <Route path="live-quiz/:id" element={<Quiz />} />
+            <Route path="completition/poll" element={<PollCompletion />} />
+            <Route path="completion/q&a" element={<QuizCompletion />} />
 
             <Route path="*" element={<Notfound />} />
           </Routes>

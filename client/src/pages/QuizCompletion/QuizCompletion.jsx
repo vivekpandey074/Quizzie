@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 
 export default function QuizCompletion() {
   const location = useLocation();
-  const { score, totalQuestions } = location.state || {};
+  const { score, totalQuestions, lastCorrect } = location.state || {};
+
   return (
     <div className="quiz-main-div">
       <div className="quiz-cont poppin-text">
@@ -14,7 +15,7 @@ export default function QuizCompletion() {
           <p className="score-text">
             Your Score is{" "}
             <span className="green">
-              0{score}/0{totalQuestions}
+              0{score + (lastCorrect ? 1 : 0)}/0{totalQuestions}
             </span>
           </p>
         </div>

@@ -66,3 +66,18 @@ export const UpdateImpressionApi = async (id) => {
     return err.response.data;
   }
 };
+export const OptionAnalyticsUpdateApi = async (
+  id,
+  questionIndex,
+  optionIndex,
+  isCorrect
+) => {
+  try {
+    const response = await axiosInstance.patch(
+      `/api/quiz/update-analytics/${id}?questionIndex=${questionIndex}&optionIndex=${optionIndex}&isCorrect=${isCorrect}`
+    );
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
