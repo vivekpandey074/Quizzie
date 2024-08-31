@@ -50,6 +50,7 @@ export default function Login() {
         toast.success(response.message);
         localStorage.setItem("token", response.token);
         window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
         throw new Error(response.message);
       }
