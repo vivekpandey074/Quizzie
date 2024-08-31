@@ -80,7 +80,7 @@ function App() {
             </Route>
 
             <Route path="live-quiz/:id" element={<Quiz />} />
-            <Route path="completition/poll" element={<PollCompletion />} />
+            <Route path="completion/poll" element={<PollCompletion />} />
             <Route path="completion/q&a" element={<QuizCompletion />} />
 
             <Route path="*" element={<Notfound />} />

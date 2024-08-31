@@ -43,7 +43,8 @@
   display: flex;
   margin-top: 4vh;
   width: 100%;
-  justify-content: space-around;
+  gap: 2vw;
+  justify-content: start;
 }
 
 .analytics-box {
@@ -63,4 +64,27 @@
 
 .text-2 {
   font-size: 1vw;
+}
+
+.analytics-box-poll {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0.4vw;
+  background-color: white;
+  border-radius: 1.2vh;
+  width: 20%;
+  padding: 0.5vw;
+  height: 15vh;
+}
+
+.poll-options-box {
+  width: 60%;
+}
+
+.poll-analysis-option-value-box {
+  width: 100% !important;
+  font-size: 0.8vw !important;
+  padding: 0.4vw;
 }

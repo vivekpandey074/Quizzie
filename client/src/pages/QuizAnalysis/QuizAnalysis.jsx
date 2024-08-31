@@ -3,6 +3,7 @@ import "./index.css";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { GetQuizApi } from "../../api/quiz";
+import defaultimg from "../../assets/defaultimage.jpg";
 
 export default function QuizAnalysis() {
   const { id } = useParams();
@@ -58,29 +59,76 @@ export default function QuizAnalysis() {
             </div>
           </div>
           <div className="questions-cont scrollable-element">
-            {quiz?.Questions?.map((quest, index) => (
-              <>
-                <div className="question-box">
-                  <p className="question">
-                    <span>Q.{index + 1}</span> {quest?.question} ?
-                  </p>
-                  <div className="question-analytics-box">
-                    <div className="analytics-box ">
-                      <p className="numerical-text">60</p>
-                      <p className="text-2">people Attempted this question</p>
+            {quiz?.quizType === "Q&A"
+              ? quiz?.Questions?.map((quest, index) => (
+                  <>
+                    <div className="question-box">
+                      <p className="question">
+                        <span>Q.{index + 1}</span> {quest?.question} ?
+                      </p>
+                      <div className="question-analytics-box">
+                        <div className="analytics-box ">
+                          <p className="numerical-text">60</p>
+                          <p className="text-2">
+                            people Attempted this question
+                          </p>
+                        </div>
+                        <div className="analytics-box">
+                          <p className="numerical-text">38</p>
+                          <p className="text-2">people Answered Correctly</p>
+                        </div>
+                        <div className="analytics-box">
+                          <p className="numerical-text">22</p>
+                          <p className="text-2">people Answered Incorrectly</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="analytics-box">
-                      <p className="numerical-text">38</p>
-                      <p className="text-2">people Answered Correctly</p>
+                  </>
+                ))
+              : quiz?.Questions?.map((quest, index) => (
+                  <>
+                    <div className="question-box">
+                      <p className="question">
+                        <span>Q.{index + 1}</span> {quest?.question} ?
+                      </p>
+                      <div className="question-analytics-box">
+                        {quest?.options.map((item) => (
+                          <>
+                            <div className="analytics-box-poll ">
+                              <p className="numerical-text">
+                                {item.pollcounts}
+                              </p>
+                              <div className="poll-options-box">
+                                <div
+                                  className={`option scrollable-element poll-analysis-option-value-box ${
+                                    quest?.optionstype === "Text&ImageURL"
+                                      ? "image-text-option"
+                                      : ""
+                                  }`}
+                                >
+                                  {quest.optionstype !== "ImageURL" ? (
+                                    <p>{item.text}</p>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {quest.optionstype !== "Text" ? (
+                                    <img
+                                      src={item.imageurl || defaultimg}
+                                      alt=""
+                                      className="option-img-2"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        ))}
+                      </div>
                     </div>
-                    <div className="analytics-box">
-                      <p className="numerical-text">22</p>
-                      <p className="text-2">people Answered Incorrectly</p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ))}
+                  </>
+                ))}
           </div>
         </>
       )}
