@@ -25,14 +25,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedPage>
-                  <Main />
-                </ProtectedPage>
-              }
-            >
+            <Route path="/" element={<Main />}>
               <Route
                 index
                 element={
