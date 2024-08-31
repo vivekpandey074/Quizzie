@@ -49,8 +49,8 @@ export default function Login() {
       if (response.success) {
         toast.success(response.message);
         localStorage.setItem("token", response.token);
-        window.location.href = "/dashboard";
         navigate("/dashboard");
+        window.location.href = "/dashboard";
       } else {
         throw new Error(response.message);
       }
