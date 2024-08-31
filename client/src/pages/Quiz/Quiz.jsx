@@ -206,7 +206,7 @@ export default function Quiz() {
               )}
             </div>
             <p className="quiz-question">
-              {Questions && Questions[currentQuestionIndex]?.question}
+              {Questions && Questions[currentQuestionIndex]?.question} ?
             </p>
             <PublicQuizOptions
               optionstype={

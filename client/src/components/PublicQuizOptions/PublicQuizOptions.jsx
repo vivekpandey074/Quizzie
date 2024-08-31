@@ -23,7 +23,9 @@ export default function PublicQuizOptions({
                 <img
                   src={item.imageurl || defaultimg}
                   alt=""
-                  className="option-img-2"
+                  className={` ${
+                    optionstype === "ImageURL" ? "option-img" : "option-img-2"
+                  } `}
                 />
               ) : (
                 <></>

@@ -68,17 +68,23 @@ export default function QuizAnalysis() {
                       </p>
                       <div className="question-analytics-box">
                         <div className="analytics-box ">
-                          <p className="numerical-text">60</p>
+                          <p className="numerical-text">
+                            {quest?.TotalAttempted}
+                          </p>
                           <p className="text-2">
                             people Attempted this question
                           </p>
                         </div>
                         <div className="analytics-box">
-                          <p className="numerical-text">38</p>
+                          <p className="numerical-text">
+                            {quest?.AnsweredCorrectly}
+                          </p>
                           <p className="text-2">people Answered Correctly</p>
                         </div>
                         <div className="analytics-box">
-                          <p className="numerical-text">22</p>
+                          <p className="numerical-text">
+                            {quest?.AnsweredIncorrectly}
+                          </p>
                           <p className="text-2">people Answered Incorrectly</p>
                         </div>
                       </div>
@@ -115,7 +121,11 @@ export default function QuizAnalysis() {
                                     <img
                                       src={item.imageurl || defaultimg}
                                       alt=""
-                                      className="option-img-2"
+                                      className={` ${
+                                        quest?.optionstype === "ImageURL"
+                                          ? "option-img"
+                                          : "option-img-2"
+                                      } `}
                                     />
                                   ) : (
                                     <></>
