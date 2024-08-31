@@ -43,6 +43,8 @@ export default function Dashboard() {
   }, []);
 
   const ImpressionFormat = (impressionCount) => {
+    if (!impressionCount) return "0";
+
     if (impressionCount <= 999) {
       return impressionCount;
     }
@@ -69,7 +71,7 @@ export default function Dashboard() {
                 <div>
                   <h1 className="dashboard-heading-1">
                     <span className="numerical">
-                      {quizesData?.dashboardAnalytics?.totalQuizzes}{" "}
+                      {quizesData?.dashboardAnalytics?.totalQuizzes || 0}{" "}
                     </span>
                     Quiz
                   </h1>
@@ -80,7 +82,7 @@ export default function Dashboard() {
                 <div>
                   <h1 className="dashboard-heading-1">
                     <span className="numerical">
-                      {quizesData?.dashboardAnalytics?.totalQuestions}{" "}
+                      {quizesData?.dashboardAnalytics?.totalQuestions || 0}{" "}
                     </span>
                     questions
                   </h1>
