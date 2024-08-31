@@ -84,7 +84,7 @@ export default function CreatingQuizModal() {
 
   const handleCancel = () => {
     dispatch(ResetQuiz());
-    navigate("/dashboard");
+    navigate("/");
   };
 
   const handleCreateQuiz = async () => {

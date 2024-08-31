@@ -20,7 +20,7 @@ export default function SharingQuizModal() {
           src={crossbtn}
           alt=""
           className="sharing-cross-btn"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/")}
         />
         <p className="poppin-text congratulation-text">
           Congrats your Quiz is Published!

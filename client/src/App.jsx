@@ -35,7 +35,6 @@ function App() {
             >
               <Route
                 index
-                path="dashboard"
                 element={
                   <ProtectedPage>
                     <Dashboard />

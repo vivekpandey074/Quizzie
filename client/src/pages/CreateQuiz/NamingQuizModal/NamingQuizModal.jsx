@@ -15,7 +15,7 @@ export default function NamingQuizModal() {
 
   const handleCancel = () => {
     dispatch(ResetQuiz());
-    navigate("/dashboard");
+    navigate("/");
   };
 
   const handleContinue = () => {

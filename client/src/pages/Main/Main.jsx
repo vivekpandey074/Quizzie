@@ -22,7 +22,7 @@ export default function Main() {
             className={`nav-btn ${active === "dashboard" ? "active" : ""} `}
             onClick={() => {
               setActive("dashboard");
-              navigate("/dashboard");
+              navigate("/");
             }}
           >
             Dashboard
